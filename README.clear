@@ -1,0 +1,14 @@
+Starting with the Docker 20.10 release, packages for the Docker Engine and
+Docker CLI are built directly from their respective source repositories
+instead of from the single repository.
+
+Practically this means:
+This repository is no longer the “source of truth” for Docker CE builds.
+The commit SHA and tag for Docker CLI build will come from the docker/cli
+repository and in a new package: docker-cli
+
+This package MUST be kept in sync with 'docker' package.
+
+Updating docker:
+- Update Makefile + spec file with new version
+- make generateupstream && make build
