@@ -25,7 +25,7 @@ Docker-cli is an open source project of the cli used in the Docker CE and Docker
 
 %build
 export AUTO_GOPATH=1 DOCKER_BUILDTAGS='exclude_graphdriver_aufs seccomp'
-export GOPATH=$HOME/go
+export GOPATH=$HOME/go GO111MODULE="auto"
 export DISABLE_WARN_OUTSIDE_CONTAINER=1
 
 mkdir -p $HOME/go/src/github.com/docker/
