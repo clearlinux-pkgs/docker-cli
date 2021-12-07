@@ -1,8 +1,8 @@
 Name     : docker-cli
-Version  : 20.10.9
-Release  : 11
-URL      : https://github.com/docker/cli/archive/v20.10.9.tar.gz
-Source0  : https://github.com/docker/cli/archive/v20.10.9.tar.gz
+Version  : 20.10.11
+Release  : 12
+URL      : https://github.com/docker/cli/archive/v20.10.11.tar.gz
+Source0  : https://github.com/docker/cli/archive/v20.10.11.tar.gz
 Summary  : cli used in the Docker CE
 Group    : Development/Tools
 License  : Apache-2.0
