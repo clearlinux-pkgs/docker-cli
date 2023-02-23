@@ -1,8 +1,8 @@
 Name     : docker-cli
-Version  : 20.10.17
-Release  : 27
-URL      : https://github.com/docker/cli/archive/v20.10.17.tar.gz
-Source0  : https://github.com/docker/cli/archive/v20.10.17.tar.gz
+Version  : 20.10.23
+Release  : 28
+URL      : https://github.com/docker/cli/archive/v20.10.23.tar.gz
+Source0  : https://github.com/docker/cli/archive/v20.10.23.tar.gz
 Summary  : cli used in the Docker CE
 Group    : Development/Tools
 License  : Apache-2.0
@@ -27,6 +27,7 @@ Docker-cli is an open source project of the cli used in the Docker CE and Docker
 export AUTO_GOPATH=1 DOCKER_BUILDTAGS='exclude_graphdriver_aufs seccomp'
 export GOPATH=$HOME/go GO111MODULE="auto"
 export DISABLE_WARN_OUTSIDE_CONTAINER=1
+unset CLEAR_DEBUG_TERSE
 
 mkdir -p $HOME/go/src/github.com/docker/
 rm -fr $HOME/go/src/github.com/docker/cli
