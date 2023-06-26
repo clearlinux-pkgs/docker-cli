@@ -1,8 +1,8 @@
 Name     : docker-cli
-Version  : 20.10.23
-Release  : 32
-URL      : https://github.com/docker/cli/archive/v20.10.23.tar.gz
-Source0  : https://github.com/docker/cli/archive/v20.10.23.tar.gz
+Version  : 24.0.2
+Release  : 33
+URL      : https://github.com/docker/cli/archive/v24.0.2.tar.gz
+Source0  : https://github.com/docker/cli/archive/v24.0.2.tar.gz
 Summary  : cli used in the Docker CE
 Group    : Development/Tools
 License  : Apache-2.0
@@ -33,7 +33,11 @@ mkdir -p $HOME/go/src/github.com/docker/
 rm -fr $HOME/go/src/github.com/docker/cli
 ln -s /builddir/build/BUILD/%docker_src_dir $HOME/go/src/github.com/docker/cli
 pushd $HOME/go/src/github.com/docker/cli
-make VERSION=%version BUILDTAGS="exclude_graphdriver_aufs  seccomp"  dynbinary manpages
+make VERSION=%version BUILDTAGS="exclude_graphdriver_aufs  seccomp"  dynbinary
+pushd man
+rm README.md
+for FILE in *.md; do go-md2man -in "$FILE" -out "${FILE%.md}"; done
+
 
 %install
 rm -rf %{buildroot}
@@ -43,16 +47,18 @@ install -p -m 755 build/docker-linux-amd64 %{buildroot}/usr/bin/docker
 
 # install bash completion file.
 install -m 0644 -D ./contrib/completion/bash/docker %{buildroot}/usr/share/bash-completion/completions/docker
+install -m 0644 -D ./contrib/completion/zsh/_docker %{buildroot}/usr/share/zsh/site-functions/_docker
 
 # install man pages
 install -d %{buildroot}/usr/share/man/man1 %{buildroot}/usr/share/man/man5 %{buildroot}/usr/share/man/man8
-install ./man/man1/* %{buildroot}/usr/share/man/man1
-install ./man/man5/* %{buildroot}/usr/share/man/man5
-install ./man/man8/* %{buildroot}/usr/share/man/man8
+install ./man/*.1 %{buildroot}/usr/share/man/man1
+install ./man/*.5 %{buildroot}/usr/share/man/man5
+install ./man/*.8 %{buildroot}/usr/share/man/man8
 chmod -x %{buildroot}/usr/share/man/man*/*
 
 %files
 %defattr(-,root,root,-)
 /usr/bin/docker
 /usr/share/bash-completion/completions/docker
+/usr/share/zsh/site-functions/_docker
 /usr/share/man/man*/*
