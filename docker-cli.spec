@@ -1,8 +1,8 @@
 Name     : docker-cli
-Version  : 24.0.2
-Release  : 34
-URL      : https://github.com/docker/cli/archive/v24.0.2.tar.gz
-Source0  : https://github.com/docker/cli/archive/v24.0.2.tar.gz
+Version  : 24.0.5
+Release  : 35
+URL      : https://github.com/docker/cli/archive/v24.0.5.tar.gz
+Source0  : https://github.com/docker/cli/archive/v24.0.5.tar.gz
 Summary  : cli used in the Docker CE
 Group    : Development/Tools
 License  : Apache-2.0
@@ -24,8 +24,9 @@ Docker-cli is an open source project of the cli used in the Docker CE and Docker
 %setup -q -n %docker_src_dir
 
 %build
-export AUTO_GOPATH=1 DOCKER_BUILDTAGS='exclude_graphdriver_aufs seccomp'
-export GOPATH=$HOME/go GO111MODULE="auto"
+export DOCKER_BUILDTAGS='exclude_graphdriver_aufs seccomp'
+export AUTO_GOPATH=1
+export GO111MODULE="auto"
 export DISABLE_WARN_OUTSIDE_CONTAINER=1
 unset CLEAR_DEBUG_TERSE
 
@@ -33,7 +34,8 @@ mkdir -p $HOME/go/src/github.com/docker/
 rm -fr $HOME/go/src/github.com/docker/cli
 ln -s /builddir/build/BUILD/%docker_src_dir $HOME/go/src/github.com/docker/cli
 pushd $HOME/go/src/github.com/docker/cli
-make VERSION=%version BUILDTAGS="exclude_graphdriver_aufs  seccomp"  dynbinary
+
+make VERSION=%version BUILDTAGS="exclude_graphdriver_aufs seccomp"  dynbinary
 pushd man
 rm README.md
 for FILE in *.md; do go-md2man -in "$FILE" -out "${FILE%.md}"; done
