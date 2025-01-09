@@ -1,6 +1,6 @@
 Name     : docker-cli
 Version  : 24.0.5
-Release  : 37
+Release  : 38
 URL      : https://github.com/docker/cli/archive/v24.0.5.tar.gz
 Source0  : https://github.com/docker/cli/archive/v24.0.5.tar.gz
 Summary  : cli used in the Docker CE
